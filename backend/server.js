@@ -24,13 +24,17 @@ app.use((req, res, next) => {
     next();
 });
 
-// Import routes (USE THIS VERSION FOR NOW)
-const productsRouter = require('./routes/products'); // Changed back to simple import
+// Import routes
+const productsRouter = require('./routes/products');
 const authRouter = require('./routes/auth');
+const cartRouter = require('./routes/cart');        // Add this
+const ordersRouter = require('./routes/orders');    // Add this
 
 // Routes
 app.use('/api/products', productsRouter);
 app.use('/api/auth', authRouter);
+app.use('/api/cart', cartRouter);                   // Add this
+app.use('/api/orders', ordersRouter);               // Add this
 
 // Basic route
 app.get('/', (req, res) => {
@@ -41,4 +45,5 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
     console.log('✅ Caching enabled: 5-minute product cache, 1-day static files cache');
+    console.log('✅ Customer features enabled: Cart and Orders functionality');
 });
