@@ -213,7 +213,6 @@ router.put('/:id', authenticate, requireAdmin, async (req, res) => {
         });
     }
 });
-
 // DELETE - Delete product (Protected - Admin only)
 router.delete('/:id', authenticate, requireAdmin, async (req, res) => {
     try {

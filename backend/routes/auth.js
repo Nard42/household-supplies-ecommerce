@@ -1,33 +1,35 @@
 const express = require('express');
-const bcrypt = require('bcryptjs');
 const router = express.Router();
 const pool = require('../config/database');
+const bcrypt = require('bcryptjs');
 
-// Helper function to generate simple tokens (in real app, use JWT)
-const generateToken = (role) => {
-    return role === 'admin' ? 'admin-token-123' : 'customer-token-456';
-};
-
-// Customer Registration
+// User Registration Endpoint
 router.post('/register', async (req, res) => {
     try {
-        const { email, password, first_name, last_name } = req.body;
+        const { first_name, last_name, email, password, role = 'customer' } = req.body;
 
         // Validation
-        if (!email || !password) {
+        if (!first_name || !last_name || !email || !password) {
             return res.status(400).json({ 
                 success: false, 
-                message: 'Email and password are required' 
+                message: 'All fields are required' 
+            });
+        }
+
+        if (password.length < 6) {
+            return res.status(400).json({ 
+                success: false, 
+                message: 'Password must be at least 6 characters long' 
             });
         }
 
         // Check if user already exists
-        const existingUser = await pool.query(
+        const userExists = await pool.query(
             'SELECT * FROM users WHERE email = $1', 
             [email]
         );
 
-        if (existingUser.rows.length > 0) {
+        if (userExists.rows.length > 0) {
             return res.status(400).json({ 
                 success: false, 
                 message: 'User already exists with this email' 
@@ -38,26 +40,23 @@ router.post('/register', async (req, res) => {
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-        // Create user
+        // Insert new user
         const result = await pool.query(
-            `INSERT INTO users (email, password, first_name, last_name, role) 
-             VALUES ($1, $2, $3, $4, 'customer') 
-             RETURNING id, email, first_name, last_name, role, created_at`,
-            [email, hashedPassword, first_name, last_name]
+            `INSERT INTO users (first_name, last_name, email, password, role) 
+             VALUES ($1, $2, $3, $4, $5) 
+             RETURNING id, first_name, last_name, email, role, created_at`,
+            [first_name, last_name, email, hashedPassword, role]
         );
-
-        const user = result.rows[0];
 
         res.status(201).json({
             success: true,
             message: 'User registered successfully',
-            token: generateToken('customer'),
             user: {
-                id: user.id,
-                email: user.email,
-                first_name: user.first_name,
-                last_name: user.last_name,
-                role: user.role
+                id: result.rows[0].id,
+                first_name: result.rows[0].first_name,
+                last_name: result.rows[0].last_name,
+                email: result.rows[0].email,
+                role: result.rows[0].role
             }
         });
 
@@ -65,12 +64,12 @@ router.post('/register', async (req, res) => {
         console.error('Registration error:', error);
         res.status(500).json({ 
             success: false, 
-            message: 'Server error during registration' 
+            message: 'Internal server error' 
         });
     }
 });
 
-// Login (Both admin and customer)
+// User Login Endpoint (Update your existing login)
 router.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -83,44 +82,39 @@ router.post('/login', async (req, res) => {
         }
 
         // Find user by email
-        const result = await pool.query(
+        const userResult = await pool.query(
             'SELECT * FROM users WHERE email = $1', 
             [email]
         );
 
-        if (result.rows.length === 0) {
+        if (userResult.rows.length === 0) {
             return res.status(401).json({ 
                 success: false, 
-                message: 'Invalid credentials' 
+                message: 'Invalid email or password' 
             });
         }
 
-        const user = result.rows[0];
+        const user = userResult.rows[0];
 
-        // Verify password (in real app, use bcrypt.compare)
-        // For now, using simple validation
-        const isValidPassword = password === 'admin123' && email === 'admin@example.com' 
-            ? true 
-            : password === 'customer123' && email === 'customer@example.com'
-            ? true
-            : await bcrypt.compare(password, user.password);
-
-        if (!isValidPassword) {
+        // Check password
+        const validPassword = await bcrypt.compare(password, user.password);
+        
+        if (!validPassword) {
             return res.status(401).json({ 
                 success: false, 
-                message: 'Invalid credentials' 
+                message: 'Invalid email or password' 
             });
         }
 
+        // Return user info (without password)
         res.json({
             success: true,
             message: 'Login successful',
-            token: generateToken(user.role),
             user: {
                 id: user.id,
-                email: user.email,
                 first_name: user.first_name,
                 last_name: user.last_name,
+                email: user.email,
                 role: user.role
             }
         });
@@ -129,34 +123,9 @@ router.post('/login', async (req, res) => {
         console.error('Login error:', error);
         res.status(500).json({ 
             success: false, 
-            message: 'Server error during login' 
+            message: 'Internal server error' 
         });
     }
-});
-
-// Get current user profile
-router.get('/me', async (req, res) => {
-    try {
-        // This would require authentication middleware
-        // For now, return simple response
-        res.json({ 
-            success: true, 
-            message: 'User profile endpoint' 
-        });
-    } catch (error) {
-        res.status(500).json({ 
-            success: false, 
-            message: 'Server error' 
-        });
-    }
-});
-
-// Logout
-router.post('/logout', (req, res) => {
-    res.json({ 
-        success: true, 
-        message: 'Logout successful' 
-    });
 });
 
 module.exports = router;

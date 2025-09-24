@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - Household Supplies</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Updated Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <!-- Header -->
+            <div class="auth-header">
+                <a href="index.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <h1>Create Account</h1>
+                <p>Join us for the best household supplies</p>
+            </div>
+
+            <!-- Registration Form -->
+            <form class="auth-form" id="registerForm">
+                <!-- Name Fields -->
+                <div class="name-fields">
+                    <div class="form-group">
+                        <label for="firstName">First Name *</label>
+                        <div class="input-group">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="firstName" name="firstName" required 
+                                   placeholder="Enter your first name" maxlength="100">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName">Last Name *</label>
+                        <div class="input-group">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="lastName" name="lastName" required 
+                                   placeholder="Enter your last name" maxlength="100">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Email Field -->
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" name="email" required 
+                               placeholder="Enter your email address" maxlength="255">
+                    </div>
+                    <div class="field-info">We'll never share your email with anyone else.</div>
+                </div>
+
+                <!-- Password Fields -->
+                <div class="form-group">
+                    <label for="password">Password *</label>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" name="password" required 
+                               placeholder="Create a secure password" minlength="6" maxlength="255">
+                        <button type="button" class="password-toggle" aria-label="Toggle password visibility">
+                            
+                        </button>
+                    </div>
+                    <div class="password-strength">
+                        <div class="strength-bar">
+                            <div class="strength-fill"></div>
+                        </div>
+                        <span class="strength-text">Password strength: <span id="strengthValue">Weak</span></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password *</label>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required 
+                               placeholder="Confirm your password">
+                        <button type="button" class="password-toggle" aria-label="Toggle password visibility">
+                            
+                        </button>
+                    </div>
+                    <div id="passwordMatch" class="validation-message"></div>
+                </div>
+
+                <!-- Terms Agreement -->
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                </div>
+
+                <button type="submit" class="auth-btn">
+                    <span class="btn-text">Create Account</span>
+                    <div class="btn-loader" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </div>
+                </button>
+            </form>
+
+           
+
+            <!-- Login Link -->
+            <div class="auth-footer">
+                <p>Already have an account? <a href="login.html">Sign in here</a></p>
+            </div>
+        </div>
+
+        <!-- Success Modal -->
+        <div id="successModal" class="modal">
+            <div class="modal-content">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3>Account Created Successfully!</h3>
+                <p>Welcome to Household Supplies. Your account has been created.</p>
+                <button class="modal-btn" onclick="closeModal()">Continue Shopping</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>
