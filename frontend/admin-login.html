@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Household Supplies</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="admin-login-page">
+    <div class="admin-auth-container">
+        <div class="admin-auth-card">
+            <!-- Admin Header -->
+            <div class="admin-auth-header">
+                <div class="admin-logo">
+                    <i class="fas fa-cogs"></i>
+                    <span>Admin Portal</span>
+                </div>
+                <h1>Administrator Access</h1>
+                <p>Restricted area - authorized personnel only</p>
+            </div>
+
+            <!-- Admin Login Form -->
+            <form class="auth-form" id="adminLoginForm">
+                <!-- Admin Identification -->
+                <div class="form-group">
+                    <label for="adminFirstName">First Name *</label>
+                    <div class="input-group">
+                        <i class="fas fa-id-card"></i>
+                        <input type="text" id="adminFirstName" name="firstName" required 
+                               placeholder="Enter your first name" maxlength="100">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="adminLastName">Last Name *</label>
+                    <div class="input-group">
+                        <i class="fas fa-id-card"></i>
+                        <input type="text" id="adminLastName" name="lastName" required 
+                               placeholder="Enter your last name" maxlength="100">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="adminEmail">Admin Email *</label>
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="adminEmail" name="email" required 
+                               placeholder="admin@company.com" maxlength="255">
+                    </div>
+                    <div class="field-info">Use your authorized admin email</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="adminPassword">Admin Password *</label>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="adminPassword" name="password" required 
+                               placeholder="Enter admin password" maxlength="255">
+                        <button type="button" class="password-toggle">
+                            
+                        </button>
+                    </div>
+                </div>
+                
+                <button type="submit" class="auth-btn admin-login-btn">
+                    <span class="btn-text">Access Admin Dashboard</span>
+                    <div class="btn-loader" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </div>
+                </button>
+            </form>
+
+            <!-- Security Notice -->
+            <div class="security-notice">
+                <div class="security-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <p><strong>Security Notice:</strong> This area contains sensitive business information. Unauthorized access is prohibited.</p>
+            </div>
+
+            <!-- Navigation Links -->
+            <div class="admin-auth-footer">
+                <p><a href="index.html"><i class="fas fa-store"></i> Back to Store</a></p>
+                <p><a href="login.html"><i class="fas fa-user"></i> Customer Login</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

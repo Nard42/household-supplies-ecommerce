@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Registration Portal - Household Supplies</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="admin-portal-page">
+    <div class="admin-portal-container">
+        <div class="admin-portal-card">
+            <!-- Portal Header -->
+            <div class="admin-portal-header">
+                <div class="admin-logo">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Admin Registration Portal</span>
+                </div>
+                <h1>Create New Administrator</h1>
+                <p>Restricted access - Master password required</p>
+            </div>
+
+            <!-- Step 1: Master Password Verification -->
+            <div class="portal-step" id="step1">
+                <form class="auth-form" id="masterPasswordForm">
+                    <div class="form-group">
+                        <label for="masterPassword">Master Access Password *</label>
+                        <div class="input-group">
+                            <i class="fas fa-key"></i>
+                            <input type="password" id="masterPassword" name="masterPassword" required 
+                                   placeholder="Enter master password">
+                            <button type="button" class="password-toggle">
+                                
+                            </button>
+                        </div>
+                        <div class="field-info">Required to access admin creation portal</div>
+                    </div>
+
+                    <button type="submit" class="auth-btn portal-access-btn">
+                        <span class="btn-text">Verify & Continue</span>
+                        <div class="btn-loader" style="display: none;">
+                            <i class="fas fa-spinner fa-spin"></i>
+                        </div>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Step 2: Admin Registration Form (Initially Hidden) -->
+            <div class="portal-step" id="step2" style="display: none;">
+                <form class="auth-form" id="adminRegistrationForm">
+                    <div class="form-group">
+                        <label for="newAdminFirstName">First Name *</label>
+                        <div class="input-group">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="newAdminFirstName" name="firstName" required 
+                                   placeholder="Enter first name" maxlength="100">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newAdminLastName">Last Name *</label>
+                        <div class="input-group">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="newAdminLastName" name="lastName" required 
+                                   placeholder="Enter last name" maxlength="100">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newAdminEmail">Email Address *</label>
+                        <div class="input-group">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="newAdminEmail" name="email" required 
+                                   placeholder="admin@company.com" maxlength="255">
+                        </div>
+                    </div>
+
+                    <!-- Auto-generated Password Display -->
+                    <div class="form-group">
+                        <label>Generated Password *</label>
+                        <div class="generated-password-container">
+                            <div class="password-display" id="generatedPassword">
+                                <span id="passwordText">Click generate button</span>
+                                <button type="button" id="copyPasswordBtn" class="copy-btn" style="display: none;">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            <button type="button" id="generatePasswordBtn" class="generate-btn">
+                                <i class="fas fa-sync-alt"></i> Generate Password
+                            </button>
+                        </div>
+                        <div class="field-info">This password will be shown only once. Save it securely.</div>
+                    </div>
+
+                    <!-- Password Strength Meter -->
+                    <div class="password-strength" id="passwordStrength" style="display: none;">
+                        <div class="strength-bar">
+                            <div class="strength-fill" id="strengthFill"></div>
+                        </div>
+                        <div class="strength-text" id="strengthText"></div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="auth-btn auth-btn-secondary" id="backToStep1">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                        <button type="submit" class="auth-btn portal-create-btn">
+                            <span class="btn-text">Create Administrator</span>
+                            <div class="btn-loader" style="display: none;">
+                                <i class="fas fa-spinner fa-spin"></i>
+                            </div>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Step 3: Success Message -->
+<div class="portal-step" id="step3" style="display: none;">
+    <div class="success-message">
+        <div class="success-content">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3>Administrator Created Successfully!</h3>
+            
+            <div class="admin-credentials" id="adminCredentials">
+                <!-- Dynamically filled with credentials -->
+            </div>
+
+            <div class="security-warning">
+                <i class="fas fa-exclamation-triangle"></i>
+                <div class="security-warning-content">
+                    <h4>Security Notice</h4>
+                    <p><strong>Important:</strong> Save these credentials securely. The generated password cannot be recovered or reset. Store it in a secure password manager.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="success-actions">
+            <button class="auth-btn" id="createAnotherAdmin">
+                <i class="fas fa-user-plus"></i> Create Another Admin
+            </button>
+            <button class="auth-btn auth-btn-secondary" onclick="window.location.href='admin-login.html'">
+                <i class="fas fa-sign-in-alt"></i> Go to Admin Login
+            </button>
+        </div>
+    </div>
+</div>
+    <script src="js/admin-portal.js"></script>
+</body>
+</html>
