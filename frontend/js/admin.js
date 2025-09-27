@@ -1,3 +1,6 @@
+// admin.js - Original Working Version (Independent Admin Login)
+const API_BASE_URL = 'http://localhost:3000/api';
+
 // Admin-specific authentication functionality
 document.addEventListener('DOMContentLoaded', function() {
     initializeAdminAuth();
@@ -33,12 +36,9 @@ async function handleAdminLogin(e) {
     
     const formData = new FormData(e.target);
     const data = {
-        firstName: formData.get('firstName'),
-        lastName: formData.get('lastName'),
+       
         email: formData.get('email'),
-        password: formData.get('password'),
-        securityCode: formData.get('securityCode'),
-        isAdmin: true // Flag to indicate admin login
+        password: formData.get('password')
     };
 
     // Admin-specific validation
@@ -73,27 +73,12 @@ async function handleAdminLogin(e) {
                 return;
             }
 
-            // Store admin session
-            localStorage.setItem('admin', JSON.stringify({
-                id: result.user.id,
-                email: result.user.email,
-                firstName: result.user.first_name,
-                lastName: result.user.last_name,
-                role: result.user.role,
-                adminLevel: result.user.admin_level,
-                loggedIn: true,
-                timestamp: Date.now(),
-                isAdmin: true
-            }));
-
-            // Show success message
-            showAdminSuccess('Admin authentication successful! Redirecting...');
+            // Show success message (ORIGINAL BEHAVIOR)
+            showAdminSuccess('Admin login successful!');
             
-            // Redirect to admin dashboard
-            setTimeout(() => {
-                window.location.href = 'admin-dashboard.html';
-            }, 1500);
-            
+                // REDIRECT TO ADMIN PRODUCTS PAGE AFTER SUCCESSFUL LOGIN
+                window.location.href = 'admin-products.html';
+    
         } else {
             showAdminError(result.message || 'Admin login failed. Please check your credentials.');
         }
@@ -108,7 +93,7 @@ async function handleAdminLogin(e) {
 
 function validateAdminLogin(data) {
     // Check required fields
-    if (!data.firstName || !data.lastName || !data.email || !data.password) {
+    if ( !data.email || !data.password) {
         return { isValid: false, message: 'All administrator fields are required' };
     }
 
@@ -116,11 +101,6 @@ function validateAdminLogin(data) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(data.email)) {
         return { isValid: false, message: 'Please enter a valid admin email address' };
-    }
-
-    // Additional admin email validation (optional)
-    if (!data.email.includes('@')) {
-        return { isValid: false, message: 'Admin email must be a company email address' };
     }
 
     return { isValid: true, message: '' };
@@ -196,4 +176,22 @@ function showAdminSuccess(message) {
             }
         }, 3000);
     }
+}
+
+function showLoading(button) {
+    const btnText = button.querySelector('.btn-text');
+    const btnLoader = button.querySelector('.btn-loader');
+    
+    if (btnText) btnText.style.display = 'none';
+    if (btnLoader) btnLoader.style.display = 'block';
+    button.disabled = true;
+}
+
+function hideLoading(button) {
+    const btnText = button.querySelector('.btn-text');
+    const btnLoader = button.querySelector('.btn-loader');
+    
+    if (btnText) btnText.style.display = 'block';
+    if (btnLoader) btnLoader.style.display = 'none';
+    button.disabled = false;
 }
