@@ -1,0 +1,726 @@
+/* Basic Reset and Variables */
+:root {
+	--color-primary-dark: #373b1f; /* Dark olive green for newsletter/footer */
+	--color-secondary-gold: #c6a76e; /* Muted gold for accents/logo */
+	--color-text-dark: #333333;
+	--color-text-light: #666666;
+	--color-background-light: #ffffff;
+	--font-heading: 'Garamond', serif; /* Simulating the classic serif for main headings */
+	--font-body: 'Helvetica Neue', Arial, sans-serif; /* Common sans-serif for body text */
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: var(--font-body);
+	color: var(--color-text-dark);
+	line-height: 1.6;
+	background-color: var(--color-background-light);
+}
+
+a {
+	text-decoration: none;
+	color: var(--color-text-dark);
+}
+
+ul {
+	list-style: none;
+}
+
+/* --- Top Banner --- */
+.top-banner {
+	background-color: var(--color-secondary-gold);
+	color: #fff;
+	font-size: 0.75rem;
+	padding: 0.5rem 0;
+	text-align: center;
+}
+
+.top-banner-content {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+/* --- Header & Navigation --- */
+.main-header {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 1rem 1.5rem;
+	border-bottom: 1px solid #eee;
+}
+
+.header-top-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.logo h1 {
+	font-family: var(--font-heading);
+	font-size: 2.5rem;
+	letter-spacing: 0.2rem;
+	font-weight: 400;
+	margin-bottom: 0.25rem;
+}
+
+.logo-underline {
+	width: 30%;
+	height: 1px;
+	background-color: var(--color-secondary-gold);
+	margin: 0 auto;
+}
+
+.language-selector select {
+	border: 1px solid #ccc;
+	padding: 0.3rem 0.5rem;
+	border-radius: 4px;
+	font-size: 0.8rem;
+	cursor: pointer;
+}
+
+.header-icons a {
+	font-size: 1.1rem;
+	margin-left: 1.25rem;
+	transition: color 0.2s;
+}
+
+.header-icons a:hover {
+	color: var(--color-secondary-gold);
+}
+
+.main-nav {
+	display: flex;
+	justify-content: center;
+	gap: 2rem;
+	padding: 1.5rem 0 0.5rem 0;
+	font-size: 0.9rem;
+	font-weight: 500;
+	letter-spacing: 0.05rem;
+}
+
+.main-nav a {
+	text-transform: uppercase;
+	padding-bottom: 0.25rem;
+	position: relative;
+	transition: color 0.2s;
+}
+
+.main-nav a:hover, .main-nav a.active {
+	color: var(--color-secondary-gold);
+}
+
+.main-nav a.active::after {
+	content: '';
+	position: absolute;
+	bottom: -3px;
+	left: 0;
+	width: 100%;
+	height: 1px;
+	background-color: var(--color-secondary-gold);
+}
+
+/* Submenu/Dropdown for Dining */
+.nav-item {
+	position: relative;
+}
+
+/*
+	 FIX: Removed 'display: flex;' from this main rule.
+	 It is now explicitly set to 'display: none;' and only
+	 becomes 'display: flex;' on hover.
+	 The centering properties (left: 50%; transform: translateX(-50%)) are preserved.
+*/
+.submenu {
+	display: none; /* Start hidden */
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	transform: translateX(-50%); /* Centers the submenu horizontally */
+	background-color: var(--color-background-light);
+	border: 1px solid #eee;
+	padding: 1.5rem;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+	z-index: 500;
+	white-space: nowrap;
+	min-width: 500px;
+	gap: 3rem;
+}
+
+.dining-menu:hover .submenu {
+	display: flex; /* Show and use flex layout only on hover */
+	justify-content: center; /* ADDED: This centers the column content inside the wide dropdown box */
+}
+
+.submenu div a {
+	display: block;
+	padding: 0.25rem 0;
+	text-transform: none;
+	font-weight: 400;
+	font-size: 0.9rem;
+	letter-spacing: normal;
+}
+
+.submenu div a:hover {
+	color: var(--color-secondary-gold);
+}
+
+.submenu div a::after {
+	display: none; /* Hide underline on submenu items */
+}
+
+/* --- Main Content --- */
+.content-container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 2rem 1.5rem;
+}
+
+.category-hero {
+	text-align: center;
+	margin-bottom: 2rem;
+}
+
+.category-hero h2 {
+	font-family: var(--font-heading);
+	font-size: 3rem;
+	font-weight: 400;
+	margin-bottom: 1rem;
+	color: var(--color-primary-dark);
+}
+
+.category-description, .category-description-repeat {
+	max-width: 600px;
+	margin: 0 auto;
+	font-size: 1rem;
+	color: var(--color-text-light);
+	line-height: 1.8;
+}
+
+.category-description-repeat {
+	margin-top: 4rem;
+	margin-bottom: 2rem;
+}
+
+/* --- Product Controls (Sort) --- */
+.product-controls {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	padding: 1rem 0;
+	border-top: 1px solid #eee;
+	border-bottom: 1px solid #eee;
+	margin-bottom: 3rem;
+}
+
+.sort-by label {
+	font-size: 0.9rem;
+	margin-right: 0.5rem;
+	font-weight: 500;
+}
+
+.sort-by select {
+	padding: 0.4rem 1rem;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 0.9rem;
+}
+
+/* --- Product Grid Placeholder --- */
+.product-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: 2rem;
+	min-height: 40vh; /* Placeholder height */
+	place-items: center;
+	color: var(--color-text-light);
+}
+
+/* --- Pagination Placeholder --- */
+.pagination {
+	text-align: center;
+	padding: 2rem 0;
+	font-size: 1.1rem;
+	color: var(--color-text-light);
+}
+
+/* --- Newsletter Section --- */
+.newsletter-section {
+	background-color: #f7f7f7;
+	padding: 4rem 1.5rem;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.newsletter-content h2 {
+	font-family: var(--font-heading);
+	font-size: 2rem;
+	font-weight: 400;
+	margin-bottom: 0.5rem;
+	color: var(--color-primary-dark);
+}
+
+.newsletter-content p {
+	max-width: 500px;
+	margin-bottom: 2rem;
+	color: var(--color-text-light);
+}
+
+.newsletter-form {
+	display: flex;
+	gap: 0.5rem;
+	max-width: 500px;
+	width: 100%;
+}
+
+.newsletter-form input {
+	flex-grow: 1;
+	padding: 0.8rem 1rem;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	font-size: 1rem;
+	outline: none;
+}
+
+.subscribe-btn {
+	background-color: var(--color-primary-dark);
+	color: white;
+	padding: 0.8rem 1.5rem;
+	border: none;
+	border-radius: 4px;
+	font-size: 1rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition: background-color 0.2s;
+	text-transform: uppercase;
+	letter-spacing: 0.05rem;
+}
+
+.subscribe-btn:hover {
+	background-color: var(--color-secondary-gold);
+}
+
+/* --- Footer --- */
+.main-footer {
+	background-color: var(--color-primary-dark);
+	color: white;
+	padding: 4rem 1.5rem 1rem 1.5rem;
+}
+
+.footer-columns {
+	max-width: 1200px;
+	margin: 0 auto 3rem auto;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+	gap: 2rem;
+	padding-bottom: 2rem;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-col h4 {
+	font-family: var(--font-body); /* Using sans-serif for footer headers */
+	font-size: 0.9rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	margin-bottom: 1.5rem;
+	letter-spacing: 0.05rem;
+}
+
+.footer-col ul li a {
+	color: #ccc;
+	font-size: 0.9rem;
+	padding: 0.3rem 0;
+	display: block;
+	transition: color 0.2s;
+}
+
+.footer-col ul li a:hover {
+	color: var(--color-secondary-gold);
+}
+
+.footer-bottom {
+	max-width: 1200px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-top: 1rem;
+	font-size: 0.8rem;
+}
+
+.trustpilot-btn {
+	color: #ccc;
+	border: 1px solid #555;
+	padding: 0.5rem 1rem;
+	border-radius: 4px;
+	display: flex;
+	align-items: center;
+	transition: background-color 0.2s;
+}
+
+.trustpilot-btn i {
+	color: #00b67a; /* Trustpilot green */
+	margin-left: 0.5rem;
+}
+
+.trustpilot-btn:hover {
+	background-color: rgba(255, 255, 255, 0.1);
+}
+
+.payment-methods i {
+	font-size: 1.5rem;
+	margin-left: 0.75rem;
+	color: #ccc;
+}
+
+/* --- Utility/Floating Elements --- */
+.scroll-to-top {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	background-color: var(--color-primary-dark);
+	color: white;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	z-index: 1000;
+}
+
+/* --- Login Modal Styles --- */
+.login-modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+	z-index: 1050;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	visibility: hidden;
+	opacity: 0;
+	transition: opacity 0.3s, visibility 0.3s;
+}
+
+.login-modal.is-visible {
+	visibility: visible;
+	opacity: 1;
+}
+
+.login-panel {
+	width: 100%;
+	max-width: 400px;
+	background: white;
+	padding: 2rem;
+	border-radius: 8px;
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+	transform: translateY(-20px);
+	transition: transform 0.3s ease-out;
+}
+
+.login-modal.is-visible .login-panel {
+	transform: translateY(0);
+}
+
+.login-panel-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 1.5rem;
+	border-bottom: 1px solid #eee;
+	padding-bottom: 1rem;
+}
+
+.login-panel-header h2 {
+	font-family: var(--font-heading);
+	font-size: 2rem;
+	font-weight: 400;
+	color: var(--color-primary-dark);
+}
+
+.close-modal-btn {
+	background: none;
+	border: none;
+	cursor: pointer;
+	font-size: 1.5rem;
+	color: var(--color-text-dark);
+	padding: 0.5rem;
+	line-height: 1;
+}
+.close-modal-btn:hover {
+	color: var(--color-secondary-gold);
+}
+
+.login-form-group {
+	margin-bottom: 1rem;
+}
+
+.login-form input {
+	width: 100%;
+	padding: 0.75rem 1rem;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	font-size: 1rem;
+	outline: none;
+	transition: border-color 0.2s;
+}
+
+.login-form input:focus {
+	border-color: var(--color-secondary-gold);
+}
+
+.lost-password-link {
+	display: block;
+	text-align: right;
+	font-size: 0.9rem;
+	margin-bottom: 1.5rem;
+	color: var(--color-text-light);
+}
+
+.lost-password-link:hover {
+	color: var(--color-secondary-gold);
+}
+
+.login-btn, .create-account-btn {
+	width: 100%;
+	padding: 0.75rem;
+	border: none;
+	border-radius: 4px;
+	font-size: 1rem;
+	font-weight: 600;
+	cursor: pointer;
+	margin-bottom: 0.5rem;
+	transition: opacity 0.2s;
+	text-transform: uppercase;
+	letter-spacing: 0.05rem;
+}
+
+.login-btn {
+	background-color: var(--color-primary-dark);
+	color: white;
+}
+
+.login-btn:hover {
+	opacity: 0.9;
+}
+
+.create-account-btn {
+	background-color: #f0f0f0;
+	color: var(--color-text-dark);
+	border: 1px solid #ddd;
+}
+
+.create-account-btn:hover {
+	background-color: #e0e0e0;
+}
+
+.login-panel-footer {
+	text-align: center;
+	margin-top: 2rem;
+	padding-top: 1rem;
+	border-top: 1px solid #eee;
+}
+
+.login-panel-footer p {
+	font-size: 0.75rem;
+	color: #999;
+	line-height: 1.4;
+}
+
+/* --- Search Modal Styles (Extracted from HTML) --- */
+
+.search-modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.4); /* Dark overlay */
+	z-index: 1000;
+	display: flex;
+	justify-content: flex-end; /* Align panel to the right */
+	visibility: hidden;
+	opacity: 0;
+	transition: opacity 0.3s, visibility 0.3s;
+}
+
+.search-modal.is-visible {
+	visibility: visible;
+	opacity: 1;
+}
+
+.search-panel {
+	width: 100%;
+	max-width: 480px; /* Slimmer panel for search */
+	background: white;
+	padding: 2rem;
+	transform: translateX(100%);
+	transition: transform 0.3s ease-out;
+	box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+	overflow-y: auto;
+}
+
+/* Ensures the panel slides in when visible */
+.search-modal.is-visible .search-panel {
+	transform: translateX(0);
+}
+
+.search-panel-header {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	margin-bottom: 2rem;
+}
+
+.close-search-btn {
+	background: none;
+	border: none;
+	cursor: pointer;
+	font-size: 1.5rem;
+	color: var(--color-text-dark);
+	padding: 0.5rem;
+	line-height: 1;
+}
+.close-search-btn:hover {
+	color: var(--color-secondary-gold);
+}
+
+.search-controls {
+	display: flex;
+	align-items: center;
+	border-bottom: 1px solid var(--color-text-dark);
+	padding-bottom: 0.5rem;
+	margin-bottom: 1.5rem;
+}
+
+.search-controls select {
+	border: none;
+	font-size: 1rem;
+	padding: 0.5rem 1rem 0.5rem 0;
+	cursor: pointer;
+	background: transparent;
+}
+
+.search-controls input[type="search"] {
+	flex-grow: 1;
+	border: none;
+	font-size: 1rem;
+	padding: 0.5rem 0;
+	outline: none;
+}
+
+.search-controls input[type="search"]::placeholder {
+	color: #aaa;
+}
+
+.quick-search-section p {
+	font-size: 0.9rem;
+	color: var(--color-text-light);
+	margin-bottom: 0.5rem;
+}
+
+.quick-search-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}
+
+.quick-search-tags span {
+	display: inline-block;
+	background-color: #f0f0f0;
+	padding: 0.3rem 0.8rem;
+	border-radius: 9999px;
+	font-size: 0.8rem;
+	cursor: pointer;
+	transition: background-color 0.2s;
+}
+
+.quick-search-tags span:hover {
+	background-color: var(--color-secondary-gold);
+	color: white;
+}
+
+
+/* --- Responsive Design (Media Queries)  --- */
+
+@media (max-width: 1024px) {
+	.main-nav {
+		gap: 1rem;
+		flex-wrap: wrap;
+		padding-top: 1rem;
+	}
+	
+	.newsletter-section {
+		flex-direction: column;
+		text-align: center;
+	}
+
+	.newsletter-content {
+		max-width: 100%;
+		margin-bottom: 2rem;
+	}
+	
+	.newsletter-form {
+		max-width: 100%;
+	}
+
+	.footer-columns {
+		grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+	}
+}
+
+@media (max-width: 768px) {
+	.header-top-row {
+		flex-direction: column;
+		text-align: center;
+	}
+	
+	.language-selector {
+		margin-bottom: 0.5rem;
+	}
+
+	.header-icons {
+		margin-top: 0.5rem;
+	}
+
+	.main-nav {
+		justify-content: space-around;
+		gap: 0.5rem;
+		font-size: 0.8rem;
+	}
+
+	.footer-bottom {
+		flex-direction: column;
+		gap: 1.5rem;
+	}
+}
+
+@media (max-width: 500px) {
+	.logo h1 {
+		font-size: 2rem;
+	}
+
+	.newsletter-form {
+		flex-direction: column;
+	}
+
+	.subscribe-btn {
+		width: 100%;
+	}
+
+	.search-panel {
+		max-width: 100%;
+	}
+}
