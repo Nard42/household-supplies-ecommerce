@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHOP - Dining Collection | E-Commerce Prototype</title>
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+    <div class="top-banner">
+        <div class="top-banner-content">
+            <p>FREE SHIPPING ON ORDERS OVER $70 | WE SHIP WORLDWIDE <i class="fa-solid fa-truck"></i></p>
+        </div>
+    </div>
+
+    <header class="main-header">
+        <div class="header-top-row">
+            <div class="language-selector">
+                <select>
+                    <option value="en">English</option>
+                    <option value="fr">French</option>
+                </select>
+            </div>
+            <div class="logo">
+                <h1>SHOP</h1>
+                <div class="logo-underline"></div>
+            </div>
+            <div class="header-icons">
+                <!-- ADDED ID TO TRIGGER SEARCH MODAL -->
+                <a href="#" id="search-icon-btn"><i class="fa-solid fa-magnifying-glass"></i></a>
+                <a href="#" id="user-icon-btn"><i class="fa-solid fa-user"></i></a> 
+                <a href="#"><i class="fa-solid fa-bag-shopping"></i></a>
+            </div>
+        </div>
+        
+        <nav class="main-nav">
+           <div class="nav-item dining-menu">
+    <a href="#" class="active">DINING</a>
+    <div class="submenu">
+      <div>
+        <a href="#">Bowls</a>
+        <a href="#">Cutlery</a>
+        <a href="#">Ceramics</a>
+      </div>
+      <div>
+        <a href="#">Glassware</a>
+        <a href="#">Plates</a>
+        <a href="#">Picnics</a>
+      </div>
+      <div>
+        <a href="#">Placemats, Trivets & Coasters</a>
+        <a href="#">Serving</a>
+        <a href="#">Tablecloths & Napkins</a>
+      </div>
+    </div>
+  </div>
+            <a href="#">DRINKING</a>
+            <a href="#">GIFTS</a>
+            <a href="#">GARDEN</a>
+            <a href="#">ACCESSORIES</a>
+            <a href="#">ABOUT</a>
+            <a href="#">CONTACT</a>
+        </nav>
+    </header>
+
+    <main class="content-container">
+        <section class="category-hero">
+            <h2>DINING</h2>
+            <p class="category-description">
+                Embrace form and functionality with our dining collections. Ceramics, cutlery, place mats, serving dishes
+                and table linen, all sustainably handcrafted by heritage brands and artisan makers.
+            </p>
+        </section>
+
+        <div class="product-controls">
+            <div class="sort-by">
+                <label for="sort-select">Featured</label>
+                <select id="sort-select">
+                    <option value="featured">Featured</option>
+                    <option value="price-asc">Price: Low to High</option>
+                    <option value="price-desc">Price: High to Low</option>
+                </select>
+            </div>
+        </div>
+        
+        <section class="product-grid" id="product-list"></section>
+
+        <div class="pagination" id="pagination-controls">
+            </div>
+
+        <p class="category-description-repeat">
+            Embrace form and functionality with our dining collections. Ceramics, cutlery, place mats, serving dishes
+            and table linen, all sustainably handcrafted by heritage brands and artisan makers.
+        </p>
+    </main>
+
+    <section class="newsletter-section">
+        <div class="newsletter-content">
+            <h2>JOIN OUR COMMUNITY</h2>
+            <p>Subscribe to our newsletter to receive the latest news from our store, including new product launches, seasonal collections and special offers.</p>
+        </div>
+        <div class="newsletter-form">
+            <input type="email" placeholder="Your email address">
+            <button type="submit" class="subscribe-btn">SUBSCRIBE</button>
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <div class="footer-columns">
+            <div class="footer-col">
+                <h4>ABOUT US</h4>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Makers</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>SHOP </h4>
+                <ul>
+                    <li><a href="#">Dining</a></li>
+                    <li><a href="#">Drinking</a></li>
+                    <li><a href="#">Garden</a></li>
+                    <li><a href="#">Accessories</a></li>
+                    <li><a href="#">Gifts</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>CUSTOMER CARE</h4>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Delivery</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Cookies Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>CONNECT</h4>
+                <ul>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Pinterest</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <a href="#" class="trustpilot-btn">Review us on <i class="fa-solid fa-star"></i> Trustpilot</a>
+            <div class="payment-methods">
+                <i class="fa-brands fa-cc-apple-pay"></i>
+                <i class="fa-brands fa-cc-paypal"></i>
+                <i class="fa-brands fa-cc-visa"></i>
+                <i class="fa-brands fa-cc-mastercard"></i>
+            </div>
+        </div>
+    </footer>
+
+    <div class="scroll-to-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">
+        <i class="fa-solid fa-chevron-up"></i>
+    </div>
+    <div class="floating-offer-popup">
+        <button class="close-btn">&times;</button>
+        <p>Enjoy 10% off your first order</p>
+    </div>
+
+    <script src="app.js" defer></script>
+
+    <!-- START: Login Modal HTML Structure -->
+    <div id="login-modal" class="login-modal">
+        <div class="login-panel">
+            
+            <div class="login-panel-header">
+                <h2>SIGN IN</h2>
+                <button id="close-modal-btn" class="close-modal-btn" aria-label="Close Login Panel">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <form class="login-form">
+                <div class="login-form-group">
+                    <label for="modal-email" class="sr-only">Email *</label>
+                    <input type="email" id="modal-email" required placeholder="Email *">
+                </div>
+                <div class="login-form-group">
+                    <label for="modal-password" class="sr-only">Password *</label>
+                    <input type="password" id="modal-password" required placeholder="Password *">
+                </div>
+
+                <a href="#" class="lost-password-link">Lost your password?</a>
+
+                <button type="submit" class="login-btn">LOGIN</button>
+                <button type="button" class="create-account-btn">CREATE AN ACCOUNT</button>
+            </form>
+
+            <div class="login-panel-footer">
+                <p>Activate Windows</p>
+                <p>Go to Settings to activate Windows.</p>
+            </div>
+
+        </div>
+    </div>
+    <!-- END: Login Modal HTML Structure -->
+
+    <!-- START: Search Modal HTML Structure (New) -->
+    <div id="search-modal" class="search-modal">
+        <div class="search-panel">
+            
+            <div class="search-panel-header">
+                <button id="close-search-btn" class="close-search-btn" aria-label="Close Search Panel">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="search-controls">
+                <select aria-label="Search Category">
+                    <option>All Categories</option>
+                    <option>Dining</option>
+                    <option>Drinking</option>
+                    <option>Gifts</option>
+                </select>
+                <input type="search" placeholder="Search our site..." aria-label="Search query input">
+            </div>
+
+            <div class="quick-search-section">
+                <p>Quick search:</p>
+                <div class="quick-search-tags">
+                    <span>Bowls</span>
+                    <span>Ceramics</span>
+                    <span>Glassware</span>
+                    <span>Plates</span>
+                    <span>Serving Dishes</span>
+                    <span>Picnic</span>
+                </div>
+            </div>
+
+            <div class="login-panel-footer">
+                <p>Search is powered by ShopSearch v1.2</p>
+            </div>
+
+        </div>
+    </div>
+    <!-- END: Search Modal HTML Structure -->
+
+    <!-- START: Combined Modal Logic -->
+    <script>
+        // --- Modal Elements ---
+        const loginModal = document.getElementById('login-modal');
+        const userIconBtn = document.getElementById('user-icon-btn');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const loginForm = document.querySelector('.login-form');
+
+        const searchModal = document.getElementById('search-modal'); 
+        const searchIconBtn = document.getElementById('search-icon-btn'); 
+        const closeSearchBtn = document.getElementById('close-search-btn'); 
+
+        /**
+         * Generic function to open a modal.
+         * It also ensures the other modal is closed.
+         * @param {HTMLElement} modalElement The modal to open.
+         */
+        function openModal(modalElement) {
+            if (modalElement) {
+                // Close the *other* modal if it is open
+                if (modalElement === loginModal) {
+                    closeModal(searchModal);
+                } else if (modalElement === searchModal) {
+                    closeModal(loginModal);
+                }
+
+                modalElement.classList.add('is-visible');
+                // Prevent background scrolling
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        /**
+         * Generic function to close a modal.
+         * @param {HTMLElement} modalElement The modal to close.
+         */
+        function closeModal(modalElement) {
+            if (modalElement) {
+                modalElement.classList.remove('is-visible');
+                // Only restore scrolling if *all* modals are closed
+                if (!loginModal.classList.contains('is-visible') && !searchModal.classList.contains('is-visible')) {
+                    document.body.style.overflow = '';
+                }
+            }
+        }
+
+        // 1. Login Modal Listeners
+        if(userIconBtn) {
+            userIconBtn.addEventListener('click', function(event) {
+                event.preventDefault(); 
+                openModal(loginModal);
+            });
+        }
+        
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', () => closeModal(loginModal));
+        }
+
+        if (loginModal) {
+            loginModal.addEventListener('click', function(event) {
+                // Clicking the dark overlay closes the modal
+                if (event.target === loginModal) {
+                    closeModal(loginModal);
+                }
+            });
+        }
+
+        if (loginForm) {
+            loginForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                console.log('Login attempt submitted.');
+            });
+        }
+
+        // 2. Search Modal Listeners
+        if(searchIconBtn) {
+            searchIconBtn.addEventListener('click', function(event) {
+                event.preventDefault(); 
+                openModal(searchModal);
+            });
+        }
+
+        if (closeSearchBtn) {
+            closeSearchBtn.addEventListener('click', () => closeModal(searchModal));
+        }
+
+        if (searchModal) {
+            searchModal.addEventListener('click', function(event) {
+                // Clicking the dark overlay closes the modal
+                if (event.target === searchModal) {
+                    closeModal(searchModal);
+                }
+            });
+        }
+
+        // 3. Global Close modal on Escape key press
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                if (loginModal && loginModal.classList.contains('is-visible')) {
+                    closeModal(loginModal);
+                } else if (searchModal && searchModal.classList.contains('is-visible')) {
+                    closeModal(searchModal);
+                }
+            }
+        });
+    </script>
+    <!-- END: Combined Modal Logic -->
+</body>
+</html>
