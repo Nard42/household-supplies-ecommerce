@@ -1,4 +1,20 @@
-/* Authentication Pages Styles */
+/* Authentication Pages Styles - Elegant Design */
+:root {
+    --color-primary-dark: #373b1f;
+    --color-secondary-gold: #c6a76e;
+    --color-text-dark: #333333;
+    --color-text-light: #666666;
+    --color-background-light: #ffffff;
+    --font-heading: 'Garamond', serif;
+    --font-body: 'Helvetica Neue', Arial, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .auth-container {
     min-height: 100vh;
     display: flex;
@@ -6,6 +22,7 @@
     justify-content: center;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     padding: 20px;
+    font-family: var(--font-body);
 }
 
 .auth-card {
@@ -39,25 +56,26 @@
     position: absolute;
     left: 0;
     top: 0;
-    color: #666;
+    color: var(--color-text-light);
     text-decoration: none;
     font-size: 18px;
     transition: color 0.3s;
 }
 
 .back-btn:hover {
-    color: #333;
+    color: var(--color-text-dark);
 }
 
 .auth-header h1 {
-    color: #333;
+    color: var(--color-primary-dark);
     margin-bottom: 10px;
-    font-size: 28px;
-    font-weight: 600;
+    font-size: 2rem;
+    font-weight: 400;
+    font-family: var(--font-heading);
 }
 
 .auth-header p {
-    color: #666;
+    color: var(--color-text-light);
     margin: 0;
 }
 
@@ -72,7 +90,7 @@
 .form-group label {
     display: block;
     margin-bottom: 8px;
-    color: #333;
+    color: var(--color-text-dark);
     font-weight: 500;
 }
 
@@ -85,7 +103,7 @@
 .input-group i {
     position: absolute;
     left: 15px;
-    color: #666;
+    color: var(--color-text-light);
     z-index: 2;
 }
 
@@ -97,13 +115,14 @@
     font-size: 16px;
     transition: all 0.3s;
     background: #f8f9fa;
+    font-family: var(--font-body);
 }
 
 .input-group input:focus {
     outline: none;
-    border-color: #667eea;
+    border-color: var(--color-secondary-gold);
     background: white;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    box-shadow: 0 0 0 3px rgba(198, 167, 110, 0.1);
 }
 
 .password-toggle {
@@ -111,7 +130,7 @@
     right: 15px;
     background: none;
     border: none;
-    color: #666;
+    color: var(--color-text-light);
     cursor: pointer;
     font-size: 16px;
 }
@@ -153,7 +172,7 @@
 
 .strength-text {
     font-size: 12px;
-    color: #666;
+    color: var(--color-text-light);
 }
 
 #strengthValue {
@@ -174,10 +193,11 @@
 .checkbox-group label {
     margin: 0;
     font-weight: normal;
+    color: var(--color-text-dark);
 }
 
 .checkbox-group a {
-    color: #667eea;
+    color: var(--color-secondary-gold);
     text-decoration: none;
 }
 
@@ -187,7 +207,7 @@
 }
 
 .forgot-password a {
-    color: #667eea;
+    color: var(--color-secondary-gold);
     text-decoration: none;
     font-size: 14px;
 }
@@ -195,7 +215,7 @@
 .auth-btn {
     width: 100%;
     padding: 15px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: var(--color-primary-dark);
     color: white;
     border: none;
     border-radius: 10px;
@@ -205,11 +225,15 @@
     transition: all 0.3s;
     position: relative;
     overflow: hidden;
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
 }
 
 .auth-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 10px 20px rgba(55, 59, 31, 0.3);
+    background: var(--color-secondary-gold);
 }
 
 .auth-btn:active {
@@ -225,11 +249,11 @@
 
 .auth-footer {
     text-align: center;
-    color: #666;
+    color: var(--color-text-light);
 }
 
 .auth-footer a {
-    color: #667eea;
+    color: var(--color-secondary-gold);
     text-decoration: none;
     font-weight: 500;
 }
@@ -243,7 +267,7 @@
 
 .field-info {
     font-size: 12px;
-    color: #666;
+    color: var(--color-text-light);
     margin-top: 5px;
 }
 
@@ -342,7 +366,7 @@
 
 .modal-btn {
     padding: 12px 30px;
-    background: #667eea;
+    background: var(--color-primary-dark);
     color: white;
     border: none;
     border-radius: 10px;
@@ -350,10 +374,12 @@
     font-size: 16px;
     margin-top: 20px;
     transition: background 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
 }
 
 .modal-btn:hover {
-    background: #5a0db9;
+    background: var(--color-secondary-gold);
 }
 
 /* Responsive Design */
@@ -368,10 +394,60 @@
     }
     
     .auth-header h1 {
-        font-size: 24px;
+        font-size: 1.75rem;
     }
     
     .modal-content {
         padding: 30px;
     }
+    
+    .input-group input {
+        padding: 10px 12px 10px 40px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 768px) {
+    .auth-container {
+        padding: 10px;
+    }
+    
+    .auth-card {
+        padding: 30px;
+    }
+}
+
+/* Additional elegant touches */
+.auth-header::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 2px;
+    background: var(--color-secondary-gold);
+    margin: 15px auto 0;
+}
+
+.input-group input::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
+.auth-btn .btn-text {
+    position: relative;
+    z-index: 1;
+}
+
+.auth-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.auth-btn:hover::before {
+    left: 100%;
 }

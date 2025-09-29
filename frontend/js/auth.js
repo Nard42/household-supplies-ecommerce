@@ -126,7 +126,7 @@ async function handleLogin(e) {
 
         if (response.ok && result.success) {
             // Store user session
-            localStorage.setItem('user', JSON.stringify({
+            localStorage.setItem('currentUser', JSON.stringify({
                 id: result.user.id,
                 email: result.user.email,
                 firstName: result.user.first_name,
@@ -146,7 +146,7 @@ async function handleLogin(e) {
                 } else {
                     window.location.href = 'index.html';
                 }
-            }, 1500);
+            }, 500);
         } else {
             showError(result.message || 'Login failed. Please try again.');
         }
@@ -201,7 +201,7 @@ async function handleRegister(e) {
             showSuccessModal();
             
             // Store user session
-            localStorage.setItem('user', JSON.stringify({
+            localStorage.setItem('currentUser', JSON.stringify({
                 id: result.user.id,
                 email: result.user.email,
                 firstName: result.user.first_name,

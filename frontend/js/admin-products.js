@@ -450,27 +450,31 @@ function displayFilteredProducts(filteredProducts) {
         editProductModal.show();
     }
 
-    async function updateProduct() {
+async function updateProduct() {
+        const productId = parseInt(document.getElementById('editProductId').value);
+        
+        // UPDATED: Validate image path before sending (project folder only)
+        const rawImagePath = document.getElementById('editProductImage').value;
+        const validatedImagePath = validateImagePath(rawImagePath);
+        
+        // If validation failed and user entered something, show error and stop
+        if (rawImagePath && !validatedImagePath) {
+            showNotification('Please enter a valid local image path (e.g., hone15.jpg or /images/products/hone15.jpg). Web URLs are not allowed.', 'error');
+            return;
+        }
+
+        const formData = {
+            name: document.getElementById('editProductName').value,
+            description: document.getElementById('editProductDescription').value,
+            price: parseFloat(document.getElementById('editProductPrice').value),
+            image_url: validatedImagePath, // Use validated path only
+            stock_quantity: parseInt(document.getElementById('editProductStock').value),
+            category: document.getElementById('editProductCategory').value
+        };
+
+        console.log('📤 Updating product:', productId, formData);
+
         try {
-            const productId = parseInt(document.getElementById('editProductId').value);
-            
-            const rawImagePath = document.getElementById('editProductImage').value;
-            const validatedImagePath = validateImagePath(rawImagePath);
-            
-            if (rawImagePath && !validatedImagePath) {
-                showNotification('Please enter a valid image path', 'error');
-                return;
-            }
-
-            const formData = {
-                name: document.getElementById('editProductName').value,
-                description: document.getElementById('editProductDescription').value,
-                price: parseFloat(document.getElementById('editProductPrice').value),
-                image_url: validatedImagePath,
-                stock_quantity: parseInt(document.getElementById('editProductStock').value),
-                category: document.getElementById('editProductCategory').value
-            };
-
             const response = await fetch(`http://localhost:3000/api/products/${productId}`, {
                 method: 'PUT',
                 headers: {
@@ -479,23 +483,35 @@ function displayFilteredProducts(filteredProducts) {
                 body: JSON.stringify(formData)
             });
 
+            console.log('📥 Update product response status:', response.status);
+
             if (!response.ok) {
                 const errorData = await response.json();
                 throw new Error(errorData.message || errorData.error || `HTTP error! status: ${response.status}`);
             }
 
             const result = await response.json();
+            console.log('✅ Product updated successfully:', result);
 
-            if (!result.success) {
-                throw new Error(result.message || 'Update failed');
+            // Update local products array
+            const index = products.findIndex(p => p.id === productId);
+            if (index !== -1) {
+                if (result.product) {
+                    products[index] = result.product;
+                } else {
+                    products[index] = { ...products[index], ...formData };
+                }
             }
-
-            await loadProducts();
+            
+            // Close modal and refresh table
             editProductModal.hide();
+            displayProductsTable();
+            
+            // Show success message
             showNotification('Product updated successfully!', 'success');
             
         } catch (error) {
-            console.error('Error updating product:', error.message);
+            console.error('❌ Error updating product:', error);
             showNotification(`Error updating product: ${error.message}`, 'error');
         }
     }
